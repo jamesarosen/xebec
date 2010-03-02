@@ -1,3 +1,0 @@
-require 'xebec'
-
-Zebec = Xebec
