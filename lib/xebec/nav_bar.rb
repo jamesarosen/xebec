@@ -11,6 +11,14 @@ module Xebec
       @name = name || :default
     end
     
+    def to_s
+      "<NavBar #{name}>"
+    end
+    
+    def inspect
+      to_s
+    end
+    
   end
   
 end
