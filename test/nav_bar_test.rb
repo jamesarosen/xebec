@@ -13,6 +13,10 @@ class NavBarTest < Test::Unit::TestCase
       assert_equal :default, @bar.name
     end
     
+    should 'use a specified name' do
+      assert_equal 'fazbot', Xebec::NavBar.new('fazbot').name
+    end
+    
   end
   
 end
