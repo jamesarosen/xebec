@@ -19,9 +19,21 @@ class NavBarProxyTest < Test::Unit::TestCase
   context 'a NavBar proxy' do
     
     setup do
-      @bar = Xebec::NavBar.new
+      @bar = Xebec::NavBar.new('elephants')
       @helper = new_nav_bar_helper
       @proxy = Xebec::NavBarProxy.new(@bar, @helper)
+    end
+    
+    should 'respond to :name' do
+      assert @proxy.respond_to?(:name)
+    end
+    
+    should "return the NavBar's name when sent :name" do
+      assert_equal 'elephants', @proxy.name
+    end
+    
+    should 'not respond to a method that the underlying NavBar does not' do
+      assert !@proxy.respond_to?(:cromulize)
     end
     
     context 'with an empty NavBar' do

@@ -20,6 +20,16 @@ module Xebec
       helper.tag(:ul, { :class => 'navbar' }, false)
     end
     
+    def respond_to?(sym)
+      return true if bar.respond_to?(sym)
+      super
+    end
+    
+    def method_missing(sym, *args, &block)
+      return bar.send(sym, *args, &block) if bar.respond_to?(sym)
+      super
+    end
+    
     protected
     
     attr_reader :bar, :helper
