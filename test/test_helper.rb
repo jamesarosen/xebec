@@ -3,10 +3,15 @@ require 'test/unit/testcase'
 require 'rubygems'
 require 'shoulda'
 require 'mocha'
-require 'redgreen'
 require 'activesupport'
 require 'actionpack'
 require 'action_view'
+
+begin
+  require 'redgreen/unicode'
+rescue
+  require 'redgreen'
+end
 
 [['..', 'lib'], ['lib']].each do |lib_dir|
   lib_path = File.expand_path(File.join(File.dirname(__FILE__), *lib_dir))

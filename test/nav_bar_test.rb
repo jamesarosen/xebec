@@ -9,6 +9,10 @@ class NavBarTest < Test::Unit::TestCase
       @bar = Xebec::NavBar.new
     end
     
+    should 'use :default as its name by default' do
+      assert_equal :default, @bar.name
+    end
+    
   end
   
 end
