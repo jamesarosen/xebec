@@ -59,6 +59,19 @@ class NavBarProxyTest < Test::Unit::TestCase
       end
     end
     
+    context 'with a NavBar that has a navigation item set as current' do
+      setup do
+        @bar.nav_item :foo, '/foo'
+        @bar.current = :foo
+      end
+      should 'render a navigation bar with the item marked as current' do
+        assert_select_from @proxy.to_s, 'ul.navbar' do
+          assert_select 'li.current', 'Foo'
+        end
+      end
+    end
+        
+    
     context 'with a NavBar that has a navigation item declared as a name and URL' do
       setup do
         @bar.nav_item :foo, 'http://foo.com'
