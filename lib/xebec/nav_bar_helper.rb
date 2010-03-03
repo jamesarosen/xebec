@@ -23,13 +23,26 @@ module Xebec
     #   end %>
     #
     # @see Xebec::NavBar#nav_item
-    def nav_bar(name = Xebec::NavBar::DEFAULT_NAME, &block)
-      (nav_bars[name] ||= NavBarProxy.new(NavBar.new(name), self)).tap do |bar|
+    def nav_bar(name = nil, &block)
+      look_up_nav_bar(name).tap do |bar|
         bar.instance_eval &block if block_given?
       end
     end
     
+    # Renders a navigation bar if and only if it contains any
+    # navigation items. Unlike +nav_bar+, this method does not
+    # accept a block.
+    def nav_bar_unless_empty(name = nil)
+      bar = look_up_nav_bar(name)
+      bar.empty? ? '' : bar
+    end
+    
     protected
+    
+    def look_up_nav_bar(name = nil)
+      name ||= Xebec::NavBar::DEFAULT_NAME
+      nav_bars[name] ||= NavBarProxy.new(NavBar.new(name), self)
+    end
     
     def nav_bars
       @nav_bars ||= {}

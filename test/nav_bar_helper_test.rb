@@ -33,4 +33,24 @@ class NavBarHelperTest < Test::Unit::TestCase
     
   end
   
+  context 'NavBarHelper#nav_bar_unless_empty' do
+    setup do
+      @helper = new_nav_bar_helper
+      @bar = @helper.nav_bar(:pets)
+    end
+    
+    context 'with an empty navigation bar' do
+      should 'return an empty String' do
+        assert @helper.nav_bar_unless_empty(:pets).blank?
+      end
+    end
+    
+    context 'with a non-empty navigation bar' do
+      setup { @bar.nav_item :cats, '/cats' }
+      should 'return a navigation bar' do
+        assert !@helper.nav_bar_unless_empty(:pets).blank?
+      end
+    end
+  end
+  
 end
