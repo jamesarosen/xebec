@@ -83,6 +83,10 @@ class NavBarProxyTest < Test::Unit::TestCase
           assert_select 'li', 'Home' do
             assert_select 'a', 0
           end
+        end
+      end
+      should 'render other items as links' do
+        assert_select_from @proxy.to_s, 'ul.navbar' do
           assert_select 'li' do
             assert_select 'a[href="/sign_up"]', 'Sign Up'
           end
