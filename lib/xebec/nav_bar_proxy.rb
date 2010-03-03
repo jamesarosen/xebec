@@ -60,7 +60,7 @@ module Xebec
     attr_reader :bar, :helper
     
     def text_for(nav_item)
-      nav_item.name.to_s.titleize
+      I18n.t "navbar.#{bar.name}.#{nav_item.name}", :default => nav_item.name.to_s.titleize
     end
     
     def url_for(nav_item)

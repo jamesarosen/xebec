@@ -19,6 +19,7 @@ class NavBarProxyTest < Test::Unit::TestCase
   context 'a NavBar proxy' do
     
     setup do
+      clear_translations!
       @bar = Xebec::NavBar.new('elephants')
       @helper = new_nav_bar_helper
       @proxy = Xebec::NavBarProxy.new(@bar, @helper)
@@ -45,12 +46,10 @@ class NavBarProxyTest < Test::Unit::TestCase
     end
     
     context 'with a NavBar that has a navigation item declared as a name' do
-      
       setup do
         @helper.stubs(:foo_path).returns("/foo")
         @bar.nav_item :foo
       end
-      
       should 'render a navigation bar with the appropriate items' do
         assert_select_from @proxy.to_s, 'ul.navbar' do
           assert_select 'li' do
@@ -58,15 +57,12 @@ class NavBarProxyTest < Test::Unit::TestCase
           end
         end
       end
-      
     end
     
     context 'with a NavBar that has a navigation item declared as a name and URL' do
-      
       setup do
         @bar.nav_item :foo, 'http://foo.com'
       end
-      
       should 'render a navigation bar with the appropriate items' do
         assert_select_from @proxy.to_s, 'ul.navbar' do
           assert_select 'li' do
@@ -74,7 +70,21 @@ class NavBarProxyTest < Test::Unit::TestCase
           end
         end
       end
-      
+    end
+    
+    context "with a NavBar that has a navigation item with an i18n'd title" do
+      setup do
+        define_translation 'navbar.elephants.foo', 'My Foos'
+        @helper.stubs(:foo_path).returns("/foo")
+        @bar.nav_item :foo
+      end
+      should 'render a navigation bar using the internationalized text' do
+        assert_select_from @proxy.to_s, 'ul.navbar' do
+          assert_select 'li' do
+            assert_select 'a', 'My Foos'
+          end
+        end
+      end
     end
     
   end
