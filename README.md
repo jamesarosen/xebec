@@ -189,10 +189,8 @@ All of the *class* versions above are just `before_filter`s that wrap instance m
       
       def index
         nav_bar(:tabs) do |nb|
-          nb.nav_item :by_alpha, :text => 'A-Z',
-                                 :link => projects_path(:tab => 'by_alpha')
-          nb.nav_item :recent, :text => 'Recently Updated',
-                               :link => projects_path(:tab => 'recent')
+          nb.nav_item :by_alpha, projects_path(:tab => 'by_alpha')
+          nb.nav_item :recent,   projects_path(:tab => 'recent')
           nb.selected = params[:tab] || :by_alpha
         end
       end
@@ -215,9 +213,9 @@ All of the *class* versions above are just `before_filter`s that wrap instance m
       protected
       def prepare_project_tabs(selected)
          nav_bar(:tabs) do |nb|
-          nb.nav_item :overview, :link => project_path(@project)
-          nb.nav_item :budget,   :link => budget_project_path(@project)
-          nb.nav_item :history,  :link => history_project_path(@project)
+          nb.nav_item :overview, project_path(@project)
+          nb.nav_item :budget,   budget_project_path(@project)
+          nb.nav_item :history,  history_project_path(@project)
           nb.selected = selected
         end
       end
