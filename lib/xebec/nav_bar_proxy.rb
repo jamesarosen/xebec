@@ -60,11 +60,11 @@ module Xebec
     attr_reader :bar, :helper
     
     def text_for(nav_item)
-      nav_item.first.to_s.titleize
+      nav_item.name.to_s.titleize
     end
     
     def url_for(nav_item)
-      nav_item.second or helper.send("#{nav_item.first}_path")
+      nav_item.href or helper.send("#{nav_item.name}_path")
     end
     
   end

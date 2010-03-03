@@ -16,15 +16,15 @@ module Xebec
     # Add a navigation item to this bar.
     #
     # @param [String, Symbol] name the name of the item
-    # @param [String, Proc] path the URL of the item; optional
+    # @param [String, Proc] href the URL of the item; optional
     #
     # To customize the link text, set the internationalization key
     # <tt>navbar.{{nav bar name}}.{{nav item name}}</tt>.
     #
     # @see Xebec::NavBarHelper#nav_bar
     # @see Xebec::NavBarProxy#to_s
-    def nav_item(name, path = nil)
-      items << [name, path]
+    def nav_item(name, href = nil)
+      items << Xebec::NavItem.new(name, href)
     end
     
     def empty?
