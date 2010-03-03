@@ -93,7 +93,7 @@ A navigation bar will automatically set an item as selected if its URL matches t
 
 ### Example Application ###
 
-To see the full range of features that Xebec supports, including internationalization and `before_filter`s for your controllers, check out the [example application](tree/master/doc/example_app/).
+To see the full range of features that Xebec supports, including internationalization and `before_filter`s for your controllers, check out the example application in `doc/example_app/`.
 
 ## What's a *xebec*? ##
 
