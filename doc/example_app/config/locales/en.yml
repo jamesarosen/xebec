@@ -1,0 +1,7 @@
+en:
+  navbar:
+    site:
+      profile: My Profile
+      company: Spiffy Labs
+    footer:
+      faq: <abbr title="Frequently Asked Questions">FAQ</abbr>

@@ -1,0 +1,16 @@
+<%= 
+  # If you want to keep your navigation code in your views, you might
+  # want to use partials like this one. Notice that this tag is an
+  # "output" tag (<%= %> as opposed to <% %>). That means that the
+  # navigation bar will be rendered as a list here. If you want to
+  # modify a navigation bar in a view without rendering it, use a
+  # non-outputting tag.
+  nav_bar :site do
+    nav_item :home,     root_path
+    nav_item :sign_in                                 unless signed_in?
+    nav_item :sign_up                                 unless signed_in?
+    nav_item :sign_out                                if signed_in?
+    nav_item :profile,  edit_user_path(current_user)  if signed_in?
+    nav_item :company,  'http://example.com'
+  end
+%>
