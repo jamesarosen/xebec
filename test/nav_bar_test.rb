@@ -17,6 +17,20 @@ class NavBarTest < Test::Unit::TestCase
       assert_equal 'fazbot', Xebec::NavBar.new('fazbot').name
     end
     
+    should 'be empty by default' do
+      assert @bar.empty?
+    end
+    
+    context 'with some items' do
+      setup do
+        @bar.nav_item :foo
+        @bar.nav_item :bar
+      end
+      should 'not be empty' do
+        assert !@bar.empty?
+      end
+    end
+    
   end
   
 end
