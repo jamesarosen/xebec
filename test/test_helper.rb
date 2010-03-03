@@ -32,6 +32,7 @@ Test::Unit::TestCase.class_eval do
   def new_nav_bar_helper
     ActionView::Base.new.tap do |helper|
       helper.extend Xebec::NavBarHelper
+      helper.stubs(:current_page?).returns(false)
     end
   end
   

@@ -38,7 +38,7 @@ module Xebec
         helper.content_tag :ul, { :class => 'navbar' } do
           bar.items.map do |item|
             helper.content_tag :li do
-              helper.content_tag :a, text_for(item), :href => url_for(item)
+              render_nav_item item
             end
           end
         end
@@ -59,12 +59,16 @@ module Xebec
     
     attr_reader :bar, :helper
     
-    def text_for(nav_item)
-      I18n.t "navbar.#{bar.name}.#{nav_item.name}", :default => nav_item.name.to_s.titleize
+    def render_nav_item(item)
+      helper.link_to_unless_current text_for_nav_item(item), href_for_nav_item(item)
     end
     
-    def url_for(nav_item)
-      nav_item.href or helper.send("#{nav_item.name}_path")
+    def text_for_nav_item(item)
+      I18n.t "navbar.#{bar.name}.#{item.name}", :default => item.name.to_s.titleize
+    end
+    
+    def href_for_nav_item(item)
+      item.href or helper.send("#{item.name}_path")
     end
     
   end

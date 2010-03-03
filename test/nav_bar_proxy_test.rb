@@ -72,6 +72,24 @@ class NavBarProxyTest < Test::Unit::TestCase
       end
     end
     
+    context 'with a NavBar that has a navigation item that links to the current page' do
+      setup do
+        @helper.stubs(:current_page?).with('/').returns(true)
+        @bar.nav_item :home, '/'
+        @bar.nav_item :sign_up, '/sign_up'
+      end
+      should 'render a non-link navigation item' do
+        assert_select_from @proxy.to_s, 'ul.navbar' do
+          assert_select 'li', 'Home' do
+            assert_select 'a', 0
+          end
+          assert_select 'li' do
+            assert_select 'a[href="/sign_up"]', 'Sign Up'
+          end
+        end
+      end
+    end
+    
     context "with a NavBar that has a navigation item with an i18n'd title" do
       setup do
         define_translation 'navbar.elephants.foo', 'My Foos'
