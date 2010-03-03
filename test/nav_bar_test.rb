@@ -21,6 +21,10 @@ class NavBarTest < Test::Unit::TestCase
       assert @bar.empty?
     end
     
+    should 'not have any item specified as current by default' do
+      assert @bar.current.blank?
+    end
+    
     context 'with some items' do
       setup do
         @bar.nav_item :foo
