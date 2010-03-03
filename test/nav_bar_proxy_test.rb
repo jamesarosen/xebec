@@ -44,6 +44,23 @@ class NavBarProxyTest < Test::Unit::TestCase
       
     end
     
+    context 'with a NavBar that has some elements' do
+      
+      setup do
+        @helper.stubs(:foo_path).returns("/foo")
+        @bar.nav_item :foo
+      end
+      
+      should 'render a navigation bar with the appropriate items' do
+        assert_select_from @proxy.to_s, 'ul.navbar' do
+          assert_select 'li' do
+            assert_select 'a[href="/foo"]', 'Foo'
+          end
+        end
+      end
+      
+    end
+    
   end
   
 end

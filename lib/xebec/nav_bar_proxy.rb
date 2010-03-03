@@ -17,7 +17,17 @@ module Xebec
     
     # @return [String] the proxied navigation bar as an HTML list.
     def to_s
-      helper.tag(:ul, { :class => 'navbar' }, false)
+      if bar.empty?
+        helper.tag(:ul, { :class => 'navbar' }, false)
+      else
+        helper.content_tag :ul, { :class => 'navbar' } do
+          bar.items.map do |item|
+            helper.content_tag :li do
+              helper.content_tag :a, text_for(item), :href => url_for(item)
+            end
+          end
+        end
+      end
     end
     
     def respond_to?(sym)
@@ -33,6 +43,14 @@ module Xebec
     protected
     
     attr_reader :bar, :helper
+    
+    def text_for(nav_item)
+      nav_item.to_s.titleize
+    end
+    
+    def url_for(nav_item)
+      helper.send "#{nav_item}_path"
+    end
     
   end
   
