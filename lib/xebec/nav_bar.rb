@@ -23,8 +23,8 @@ module Xebec
     #
     # @see Xebec::NavBarHelper#nav_bar
     # @see Xebec::NavBarProxy#to_s
-    def nav_item(name)
-      items << name
+    def nav_item(name, path = nil)
+      items << [name, path]
     end
     
     def empty?
