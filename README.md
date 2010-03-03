@@ -75,15 +75,10 @@ To add items to your navigation bar in a view, call `nav_bar` with a block conta
     
 ### Highlighting the "Current" Element of a Navigation Bar ###
 
-The `nav_bar` helper method will add the name of the currently-selected navigation item to the `<ul>`'s class. Highlighting just takes a little CSS trickery:
+The `nav_bar` helper method will add the "current" class to the currently-selected item of each navigation bar. Highlighting the item requires just some basic CSS:
 
     ul.navbar { color: green; }
-    
-    ul.navbar.home li.home, ul.navbar.sign_in li.sign_in,
-    ul.navbar.sign_up li.sign_up, ul.navbar.sign_out li.sign_out,
-    ul.navbar.faq li.faq {
-      color: purple;
-    }
+    ul.navbar li.current { color: purple; }
     
 ### Setting the "Current" Element of a Navigation Bar ###
 

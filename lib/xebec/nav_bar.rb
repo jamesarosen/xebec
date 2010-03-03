@@ -6,6 +6,7 @@ module Xebec
     
     attr_reader :name
     attr_reader :items
+    attr_accessor :current
     
     # Create a new NavBar object.
     #
@@ -13,6 +14,7 @@ module Xebec
     def initialize(name = nil)
       @name = name || DEFAULT_NAME
       @items = []
+      @current = nil
     end
     
     # Add a navigation item to this bar.

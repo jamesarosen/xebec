@@ -37,9 +37,7 @@ module Xebec
       else
         helper.content_tag :ul, { :class => 'navbar' } do
           bar.items.map do |item|
-            helper.content_tag :li do
-              render_nav_item item
-            end
+            render_nav_item item
           end
         end
       end
@@ -60,7 +58,12 @@ module Xebec
     attr_reader :bar, :helper
     
     def render_nav_item(item)
-      helper.link_to_unless_current text_for_nav_item(item), href_for_nav_item(item)
+      text = text_for_nav_item item
+      href = href_for_nav_item item
+      klass = is_current_nav_item?(item, href) ? 'current' : ''
+      helper.content_tag :li, :class => klass do
+        helper.link_to_unless_current text, href
+      end
     end
     
     def text_for_nav_item(item)
@@ -69,6 +72,10 @@ module Xebec
     
     def href_for_nav_item(item)
       item.href or helper.send("#{item.name}_path")
+    end
+    
+    def is_current_nav_item?(item, href)
+      bar.current == item.name || bar.current.blank? && helper.current_page?(href)
     end
     
   end

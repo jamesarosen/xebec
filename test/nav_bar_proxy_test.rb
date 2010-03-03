@@ -92,6 +92,11 @@ class NavBarProxyTest < Test::Unit::TestCase
           end
         end
       end
+      should 'add the "current" class to the current item' do
+        assert_select_from @proxy.to_s, 'ul.navbar' do
+          assert_select 'li.current', 'Home'
+        end
+      end
     end
     
     context "with a NavBar that has a navigation item with an i18n'd title" do
