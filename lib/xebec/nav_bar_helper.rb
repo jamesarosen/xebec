@@ -23,8 +23,8 @@ module Xebec
     #   end %>
     #
     # @see Xebec::NavBar#nav_item
-    def nav_bar
-      return NavBarProxy.new(NavBar.new, self)
+    def nav_bar(name = nil)
+      return NavBarProxy.new(NavBar.new(name), self)
     end
     
   end

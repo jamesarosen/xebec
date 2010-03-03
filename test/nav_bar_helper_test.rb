@@ -13,6 +13,10 @@ class NavBarHelperTest < Test::Unit::TestCase
       assert @helper.nav_bar.kind_of?(Xebec::NavBarProxy)
     end
     
+    should 'return a NavBar with the name passed to :nav_bar' do
+      assert_equal :snacks, @helper.nav_bar(:snacks).name
+    end
+    
   end
   
 end
