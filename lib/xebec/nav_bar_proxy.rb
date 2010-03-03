@@ -16,6 +16,21 @@ module Xebec
     end
     
     # @return [String] the proxied navigation bar as an HTML list.
+    #
+    # The HREF for each navigation item is generated as follows:
+    #
+    # * if the item was declared with a link
+    #   (e.g. <tt>nav_item :faq, page_path(:page => :faq)</tt>),
+    #   use that link
+    # * else, try to use the route named after the navigation item
+    #   (e.g. <tt>nav_item :home</tt> uses <tt>home_path</tt>)
+    #
+    # The link text for each navigation is generated as follows:
+    #
+    # * if the internationalization key
+    #   <tt>navbar.{{nav bar name}}.{{nav item name}}</tt> is
+    #   defined, use that value
+    # * else, use <tt>nav_item.name.titleize</tt>
     def to_s
       if bar.empty?
         helper.tag(:ul, { :class => 'navbar' }, false)
