@@ -31,6 +31,15 @@ class NavBarTest < Test::Unit::TestCase
       end
     end
     
+    should 'not allow a nameless item to be added' do
+      assert_raises ArgumentError do
+        @bar.nav_item nil
+      end
+      assert_raises ArgumentError do
+        @bar.nav_item ''
+      end
+    end
+    
   end
   
 end
