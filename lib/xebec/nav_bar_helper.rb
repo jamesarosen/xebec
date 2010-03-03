@@ -23,8 +23,10 @@ module Xebec
     #   end %>
     #
     # @see Xebec::NavBar#nav_item
-    def nav_bar(name = Xebec::NavBar::DEFAULT_NAME)
-      nav_bars[name] ||= NavBarProxy.new(NavBar.new(name), self)
+    def nav_bar(name = Xebec::NavBar::DEFAULT_NAME, &block)
+      (nav_bars[name] ||= NavBarProxy.new(NavBar.new(name), self)).tap do |bar|
+        bar.instance_eval &block if block_given?
+      end
     end
     
     protected
