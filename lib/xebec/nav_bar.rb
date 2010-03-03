@@ -2,6 +2,8 @@ module Xebec
   
   class NavBar
     
+    DEFAULT_NAME = :default
+    
     attr_reader :name
     attr_reader :items
     
@@ -9,7 +11,7 @@ module Xebec
     #
     # @param [String] name the name of the navigation bar; defaults to :default
     def initialize(name = nil)
-      @name = name || :default
+      @name = name || DEFAULT_NAME
       @items = []
     end
     

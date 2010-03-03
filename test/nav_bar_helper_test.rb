@@ -17,6 +17,11 @@ class NavBarHelperTest < Test::Unit::TestCase
       assert_equal :snacks, @helper.nav_bar(:snacks).name
     end
     
+    should 'return the same NavBar for repeated calls to :nav_bar with the same name' do
+      snacks = @helper.nav_bar(:snacks)
+      assert_equal snacks, @helper.nav_bar(:snacks)
+    end
+    
   end
   
 end
