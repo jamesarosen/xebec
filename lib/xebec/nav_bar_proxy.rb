@@ -48,6 +48,10 @@ module Xebec
       end
     end
     
+    def inspect
+      to_s
+    end
+    
     def respond_to?(sym)
       return true if bar.respond_to?(sym)
       super
