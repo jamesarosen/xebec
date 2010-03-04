@@ -40,7 +40,7 @@ class NavBarProxyTest < Test::Unit::TestCase
     context 'with an empty NavBar' do
     
       should 'render an empty navigation bar' do
-        assert_equal '<ul class="navbar" />', @proxy.to_s
+        assert_select_from @proxy.to_s, 'ul.navbar', /$^/
       end
       
     end
