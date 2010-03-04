@@ -1,3 +1,5 @@
+require 'xebec/nav_item'
+
 module Xebec
   
   class NavBar

@@ -1,3 +1,5 @@
+require 'xebec/nav_bar'
+require 'xebec/nav_bar_proxy'
 require 'xebec/has_nav_bars'
 
 module Xebec
@@ -28,6 +30,8 @@ module Xebec
     #
     # @see Xebec::NavBar#nav_item
     # @see Xebec::HasNavBars#nav_bar
+    #
+    # @return [Xebec::NavBarProxy]
     def nav_bar(name = nil, &block)
       look_up_nav_bar_and_eval name, &block
     end
@@ -35,6 +39,8 @@ module Xebec
     # Renders a navigation bar if and only if it contains any
     # navigation items. Unlike +nav_bar+, this method does not
     # accept a block.
+    #
+    # @return [String, Xebec::NavBarProxy]
     def nav_bar_unless_empty(name = nil)
       bar = look_up_nav_bar name
       bar.empty? ? '' : bar

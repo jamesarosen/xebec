@@ -1,8 +1,10 @@
+require 'xebec/nav_bar'
+
 module Xebec
   
   # A supporting mixin for NavBarHelper and ControllerSupport.
   # Looks up navigation bars by name.
-  module HasNavBars
+  module HasNavBars #:nodoc:
     
     protected
     

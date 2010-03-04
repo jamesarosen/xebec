@@ -1,5 +1,9 @@
+require 'xebec/nav_bar'
+
 module Xebec
   
+  # A proxy for a Xebec::NavBar that knows how to turn the NavBar
+  # into an HTML list using ActionView helper methods.
   class NavBarProxy
     
     # Create a new NavBar proxy object. The proxy will pass all
@@ -7,7 +11,7 @@ module Xebec
     # render the NavBar as an HTML list.
     #
     # @param [Xebec::NavBar] bar the navigation bar to proxy
-    # @param [#content_tag AND #link_to] helper the ActionView helper
+    # @param [#tag AND #content_tag AND #link_to] helper the ActionView helper
     def initialize(bar, helper)
       raise ArgumentError.new("#{bar || '<nil>'} is not a NavBar") unless bar.kind_of?(NavBar)
       raise ArgumentError.new("#{helper || '<nil>'} does not seem to be a view helper") unless
