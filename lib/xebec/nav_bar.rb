@@ -42,7 +42,7 @@ module Xebec
     end
     
     def inspect
-      to_s
+      "<NavBar #{name}: #{items.map(&:name).join('|')}>"
     end
     
   end
