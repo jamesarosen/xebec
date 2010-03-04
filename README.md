@@ -80,6 +80,11 @@ The `nav_bar` helper method will add the "current" class to the currently-select
     ul.navbar { color: green; }
     ul.navbar li.current { color: purple; }
     
+Each rendered navigation bar will include its name as a CSS class if you want to style them differently:
+
+    ul.navbar.site { color: green; }
+    ul.navbar.area { color: white; background-color: green; }
+    
 ### Setting the "Current" Element of a Navigation Bar ###
 
 A navigation bar will automatically set an item as selected if its URL matches the current page URL. That will work for pages like "FAQ" above, but what if you want "Projects" to be highlighted not only for the projects list page but also for any page in the "Projects" area, such as an individual project's "Budget" tab? You can manually set the *current* item in a navigation bar like so:

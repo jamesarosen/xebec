@@ -36,10 +36,11 @@ module Xebec
     #   defined, use that value
     # * else, use <tt>nav_item.name.titleize</tt>
     def to_s
+      klass = "navbar #{bar.name}"
       if bar.empty?
-        helper.tag(:ul, { :class => 'navbar' }, false)
+        helper.tag(:ul, { :class => klass }, false)
       else
-        helper.content_tag :ul, { :class => 'navbar' } do
+        helper.content_tag :ul, { :class => klass } do
           bar.items.map do |item|
             render_nav_item item
           end

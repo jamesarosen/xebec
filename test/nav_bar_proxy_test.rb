@@ -37,6 +37,10 @@ class NavBarProxyTest < Test::Unit::TestCase
       assert !@proxy.respond_to?(:cromulize)
     end
     
+    should "render a navigation bar with the class 'navbar' and the bar's name" do
+      assert_select_from @proxy.to_s, "ul.navbar.elephants"
+    end
+    
     context 'with an empty NavBar' do
     
       should 'render an empty navigation bar' do
