@@ -69,8 +69,8 @@ module Xebec
     def render_nav_item(item)
       text = text_for_nav_item item
       href = href_for_nav_item item
-      klass = is_current_nav_item?(item, href) ? 'current' : ''
-      helper.content_tag :li, :class => klass do
+      options = is_current_nav_item?(item, href) ? { :class => :current } : {}
+      helper.content_tag :li, options do
         helper.link_to_unless_current text, href
       end
     end

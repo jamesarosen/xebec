@@ -74,7 +74,22 @@ class NavBarProxyTest < Test::Unit::TestCase
         end
       end
     end
-        
+    
+    context 'with a NavBar that has a navigation item not set as current' do
+      setup do
+        @bar.nav_item :foo, '/foo'
+        @bar.current = :baz
+      end
+      should 'render a navigation bar with the item not marked as current' do
+        assert_select_from @proxy.to_s, 'ul.navbar' do
+          assert_select 'li', 'Foo'
+          assert_select 'li.current', { :count => 0, :text=> 'Foo' }
+        end
+      end
+      should 'not render an empty "class" attribute' do
+        assert(!(/class\s*=\s*["']\s*["']/ === @proxy.to_s))
+      end
+    end
     
     context 'with a NavBar that has a navigation item declared as a name and URL' do
       setup do
