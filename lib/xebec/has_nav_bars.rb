@@ -10,11 +10,11 @@ module Xebec
     
     # Looks up the named nav bar, creates it if it
     # doesn't exist, and evaluates the the block, if
-    # given, in the scope of the nav bar.
+    # given, in the scope of +self+, yielding the nav bar.
     def look_up_nav_bar_and_eval(name = nil, &block)
       name ||= Xebec::NavBar::DEFAULT_NAME
       look_up_nav_bar(name).tap do |bar|
-        bar.instance_eval &block if block_given?
+        block.bind(self).call(bar) if block_given?
       end
     end
     

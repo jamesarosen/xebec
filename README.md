@@ -67,9 +67,9 @@ Xebec will assign this navigation bar the name `:default` in case you need to re
 To add items to your navigation bar in a view, call `nav_bar` with a block containing any number of `nav_item` calls:
 
     <%
-      nav_bar :site do
-        nav_item :home,     root_path
-        nav_item :sign_in             unless signed_in? # assumes sign_in_path
+      nav_bar :site do |nb|
+        nb.nav_item :home,     root_path
+        nb.nav_item :sign_in   unless signed_in? # assumes sign_in_path
       end
     %>
     

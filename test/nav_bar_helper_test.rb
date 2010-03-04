@@ -22,13 +22,19 @@ class NavBarHelperTest < Test::Unit::TestCase
       assert_equal snacks, @helper.nav_bar(:snacks)
     end
     
-    should "evaluate a block in the NavBar's scope" do
-      bar = @helper.nav_bar
-      bar.stubs(:zoink!)
+    should "evaluate a block in the helper's scope" do
+      @helper.expects(:zoink!)
       @helper.nav_bar do
         zoink!
       end
-      assert_received(bar, :zoink!)
+    end
+    
+    should "yield the NavBar proxy to the given block" do
+      bar = @helper.nav_bar
+      bar.expects :zoink!
+      @helper.nav_bar do |nb|
+        nb.zoink!
+      end
     end
     
   end
