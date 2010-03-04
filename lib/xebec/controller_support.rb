@@ -40,8 +40,8 @@ module Xebec
       #     nb.nav_item :new,      new_message_path
       #   end
       def nav_bar(name = Xebec::NavBar::DEFAULT_NAME, options = {}, &block)
-        append_before_filter options do
-          nav_bar name, &block
+        append_before_filter options do |controller|
+          controller.nav_bar name, &block
         end
         nil
       end
@@ -63,7 +63,7 @@ module Xebec
       # @example
       #   nav_bar :tabs do |nb|
       #     nb.nav_item :overview, @project
-      #     nb.nav_item :budget,   project_budget_path(@project)
+      #     nb.nav_item :budget,   budget_project_path(@project)
       #     nb.nav_item :edit,     edit_project_path(@project)
       #   end
       def nav_bar(name = Xebec::NavBar::DEFAULT_NAME, &block)

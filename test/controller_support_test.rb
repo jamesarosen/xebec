@@ -17,7 +17,7 @@ class ControllerSupportTest < Test::Unit::TestCase
   
   def call_before_filters
     @controller_class.before_filters.each do |filter|
-      filter.bind(@controller).call
+      filter.call(@controller)
     end
   end
   
