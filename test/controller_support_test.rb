@@ -44,4 +44,11 @@ class ControllerSupportTest < Test::Unit::TestCase
     
   end
   
+  context 'ControllerSupport::InstanceMethods#nav_bar' do
+    should 'treat Symbol names and String names equivalently' do
+      left = @controller.nav_bar(:left)
+      assert_equal left, @controller.nav_bar('left')
+    end
+  end
+  
 end

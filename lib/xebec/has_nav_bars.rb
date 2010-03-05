@@ -23,7 +23,7 @@ module Xebec
     end
     
     def nav_bars
-      @nav_bars ||= {}
+      @nav_bars ||= HashWithIndifferentAccess.new
     end
     
   end

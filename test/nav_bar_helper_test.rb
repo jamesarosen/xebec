@@ -22,6 +22,11 @@ class NavBarHelperTest < Test::Unit::TestCase
       assert_equal snacks, @helper.nav_bar(:snacks)
     end
     
+    should 'treat Symbol names and String names equivalently' do
+      desserts = @helper.nav_bar(:desserts)
+      assert_equal desserts, @helper.nav_bar('desserts')
+    end
+    
     should "evaluate a block in the helper's scope" do
       @helper.expects(:zoink!)
       @helper.nav_bar do
