@@ -7,7 +7,7 @@ namespace :gem do
       gemspec.description = "Helpers for generating navigation bars"
       gemspec.email = "james.a.rosen@gmail.com"
       gemspec.homepage = "http://github.com/jamesarosen/xebec"
-      gemspec.authors = ["James Rosen"]
+      gemspec.authors = ["James A. Rosen"]
       gemspec.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Xebec Documentation", "--charset", "utf-8"]
       gemspec.platform = Gem::Platform::RUBY
       gemspec.add_development_dependency 'shoulda', '~> 2.10.3'
