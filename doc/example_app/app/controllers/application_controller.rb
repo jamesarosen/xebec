@@ -1,3 +1,5 @@
+# Part of an example application showing the
+# many features of Xebec.
 class ApplicationController < ActionController::Base
   
   # Add Xebec's view helper methods:

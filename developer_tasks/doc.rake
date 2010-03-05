@@ -10,7 +10,7 @@ namespace :doc do
     require 'yard/rake/yardoc_task'
 
     YARD::Rake::YardocTask.new(:generate) do |yt|
-      yt.files   = Dir.glob(File.join(project_root, 'lib', '**', '*.rb')) + 
+      yt.files   = Dir.glob(File.join(project_root, '{lib,doc/example_app}', '**', '*.rb')) + 
                    [ File.join(project_root, 'README.md') ]
       yt.options = ['--output-dir', doc_destination, '--readme', 'README.md']
     end

@@ -1,3 +1,5 @@
+# Part of an example application showing the
+# many features of Xebec.
 class ProjectsController < ApplicationController
   
   # set the selected item for the :area navigation bar
