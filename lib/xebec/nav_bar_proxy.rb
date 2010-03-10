@@ -76,7 +76,8 @@ module Xebec
     end
     
     def text_for_nav_item(item)
-      I18n.t "navbar.#{bar.name}.#{item.name}", :default => item.name.to_s.titleize
+      item_name = item.name
+      I18n.t "navbar.#{bar.name}.#{item_name}", :default => item_name.to_s.titleize
     end
     
     def href_for_nav_item(item)
@@ -84,7 +85,8 @@ module Xebec
     end
     
     def is_current_nav_item?(item, href)
-      bar.current == item.name || bar.current.blank? && helper.current_page?(href)
+      current = bar.current
+      current == item.name || current.blank? && helper.current_page?(href)
     end
     
   end
