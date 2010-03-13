@@ -9,8 +9,8 @@ class NavBarHelperTest < Test::Unit::TestCase
       @helper = new_nav_bar_helper
     end
     
-    should 'return a NavBar proxy' do
-      assert @helper.nav_bar.kind_of?(Xebec::NavBarProxy)
+    should 'return a NavBar renderer' do
+      assert @helper.nav_bar.kind_of?(Xebec::NavBarRenderer)
     end
     
     should 'return a NavBar with the given name' do
@@ -39,7 +39,7 @@ class NavBarHelperTest < Test::Unit::TestCase
       end
     end
     
-    should "yield the NavBar proxy to the given block" do
+    should "yield the NavBar renderer to the given block" do
       bar = @helper.nav_bar
       bar.expects :zoink!
       @helper.nav_bar do |nb|

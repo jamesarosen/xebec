@@ -3,15 +3,15 @@ require 'xebec/html5'
 
 module Xebec
   
-  # A proxy for a Xebec::NavBar that knows how to turn the NavBar
+  # A renderer for a Xebec::NavBar that knows how to turn the NavBar
   # into an HTML list using ActionView helper methods.
-  class NavBarProxy
+  class NavBarRenderer
     
-    # Create a new NavBar proxy object. The proxy will pass all
+    # Create a new NavBar renderer object. The renderer will pass all
     # methods on to the NavBar except for +to_s+, which will 
     # render the NavBar as an HTML list.
     #
-    # @param [Xebec::NavBar] bar the navigation bar to proxy
+    # @param [Xebec::NavBar] bar the navigation bar to renderer
     # @param [#tag AND #content_tag AND #link_to] helper the ActionView helper
     def initialize(bar, helper)
       raise ArgumentError.new("#{bar || '<nil>'} is not a NavBar") unless bar.kind_of?(NavBar)

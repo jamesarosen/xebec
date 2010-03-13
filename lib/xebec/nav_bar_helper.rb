@@ -1,5 +1,5 @@
 require 'xebec/nav_bar'
-require 'xebec/nav_bar_proxy'
+require 'xebec/nav_bar_renderer'
 require 'xebec/has_nav_bars'
 
 module Xebec
@@ -16,7 +16,7 @@ module Xebec
     #   <%= navbar :tabs %>
     #   # => <ul class="navbar tabs">...</ul>
     #
-    # @see Xebec::NavBarProxy#to_s
+    # @see Xebec::NavBarRenderer#to_s
     # 
     # If called with a block, yields the underlying NavBar for
     # modification.
@@ -30,7 +30,7 @@ module Xebec
     # @see Xebec::NavBar#nav_item
     # @see Xebec::HasNavBars#nav_bar
     #
-    # @return [Xebec::NavBarProxy]
+    # @return [Xebec::NavBarRenderer]
     def nav_bar(name = nil, html_attributes = {}, &block)
       look_up_nav_bar_and_eval name, html_attributes, &block
     end
@@ -39,7 +39,7 @@ module Xebec
     # navigation items. Unlike +nav_bar+, this method does not
     # accept a block.
     #
-    # @return [String, Xebec::NavBarProxy]
+    # @return [String, Xebec::NavBarRenderer]
     def nav_bar_unless_empty(name = nil, html_attributes = {})
       bar = look_up_nav_bar name, html_attributes
       bar.empty? ? '' : bar
@@ -62,11 +62,11 @@ EOS
     protected
     
     # Override HasNavBars#look_up_nav_bar to replace with a
-    # proxy if necessary.
+    # renderer if necessary.
     def look_up_nav_bar(name, html_attributes)
       bar = super(name, html_attributes)
       if bar.kind_of?(Xebec::NavBar)
-        bar = nav_bars[bar.name] = NavBarProxy.new(bar, self)
+        bar = nav_bars[bar.name] = NavBarRenderer.new(bar, self)
       end
       bar
     end
