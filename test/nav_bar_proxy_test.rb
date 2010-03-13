@@ -33,6 +33,12 @@ class NavBarProxyTest < Test::Unit::TestCase
       assert_equal 'elephants', @proxy.name
     end
     
+    should 'support additional HTML properties' do
+      @bar.html_attributes.merge!(:id => 'salads-nav')
+      assert_equal({:id => 'salads-nav'}, @proxy.html_attributes)
+      assert_select_from @proxy.to_s, '#salads-nav'
+    end
+    
     should 'not respond to a method that the underlying NavBar does not' do
       assert !@proxy.respond_to?(:cromulize)
     end

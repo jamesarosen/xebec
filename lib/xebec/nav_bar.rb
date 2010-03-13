@@ -8,13 +8,17 @@ module Xebec
     
     attr_reader :name
     attr_reader :items
+    attr_reader :html_attributes
     attr_accessor :current
     
     # Create a new NavBar object.
     #
     # @param [String] name the name of the navigation bar; defaults to :default
-    def initialize(name = nil)
+    # @param [Hash] html_attributes additional HTML attributes for the
+    #                               navigation bar, e.g. { :id => 'my-navbar' }
+    def initialize(name = nil, html_attributes = nil)
       @name = name || DEFAULT_NAME
+      @html_attributes = html_attributes || {}
       @items = []
       @current = nil
     end

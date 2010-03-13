@@ -62,6 +62,10 @@ If you only have one navigation bar on your site, you can leave off the name, li
 
     <%= nav_bar %>
     
+If you want to add extra HTML attributes to the root navigation bar element (say, for compatibility with existing CSS and Javascript), you can pass them to the `nav_bar` call:
+
+    <%= nav_bar :site, :id => 'sitenav' %>
+    
 Xebec will assign this navigation bar the name `:default` in case you need to refer to it elsewhere, but you probably won't.
 
 #### Populating a Navigation Bar ####

@@ -70,12 +70,14 @@ module Xebec
     attr_reader :bar, :helper
     
     def root_navbar_element
-      klass = "#{bar.name}"
+      html_attributes = bar.html_attributes
+      html_attributes[:class] ||= ''
+      (html_attributes[:class] << " #{bar.name}").strip!
       if helper.user_agent_supports_html5?
-        return :nav, { :class => klass }
+        return :nav, html_attributes
       else
-        klass << ' navbar'
-        return :div, { :class => klass }
+        html_attributes[:class] << " navbar"
+        return :div, html_attributes
       end
     end
     

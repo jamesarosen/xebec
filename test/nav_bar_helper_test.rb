@@ -27,6 +27,11 @@ class NavBarHelperTest < Test::Unit::TestCase
       assert_equal desserts, @helper.nav_bar('desserts')
     end
     
+    should 'allow additional HTML attributes' do
+      salads = @helper.nav_bar(:salads, :id => 'salads-nav')
+      assert_equal 'salads-nav', @helper.nav_bar(:salads).html_attributes[:id]
+    end
+    
     should "evaluate a block in the helper's scope" do
       @helper.expects(:zoink!)
       @helper.nav_bar do

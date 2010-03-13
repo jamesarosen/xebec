@@ -13,7 +13,7 @@ module Xebec
     # or "=navbar" in HAML), renders the navigation bar.
     #
     # @example
-    #   <%= navbar :tabs%>
+    #   <%= navbar :tabs %>
     #   # => <ul class="navbar tabs">...</ul>
     #
     # @see Xebec::NavBarProxy#to_s
@@ -31,8 +31,8 @@ module Xebec
     # @see Xebec::HasNavBars#nav_bar
     #
     # @return [Xebec::NavBarProxy]
-    def nav_bar(name = nil, &block)
-      look_up_nav_bar_and_eval name, &block
+    def nav_bar(name = nil, html_attributes = {}, &block)
+      look_up_nav_bar_and_eval name, html_attributes, &block
     end
     
     # Renders a navigation bar if and only if it contains any
@@ -40,8 +40,8 @@ module Xebec
     # accept a block.
     #
     # @return [String, Xebec::NavBarProxy]
-    def nav_bar_unless_empty(name = nil)
-      bar = look_up_nav_bar name
+    def nav_bar_unless_empty(name = nil, html_attributes = {})
+      bar = look_up_nav_bar name, html_attributes
       bar.empty? ? '' : bar
     end
     
@@ -63,8 +63,8 @@ EOS
     
     # Override HasNavBars#look_up_nav_bar to replace with a
     # proxy if necessary.
-    def look_up_nav_bar(name)
-      bar = super(name)
+    def look_up_nav_bar(name, html_attributes)
+      bar = super(name, html_attributes)
       if bar.kind_of?(Xebec::NavBar)
         bar = nav_bars[bar.name] = NavBarProxy.new(bar, self)
       end
