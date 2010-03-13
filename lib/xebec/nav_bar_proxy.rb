@@ -1,4 +1,5 @@
 require 'xebec/nav_bar'
+require 'xebec/html5'
 
 module Xebec
   
@@ -36,13 +37,15 @@ module Xebec
     #   defined, use that value
     # * else, use <tt>nav_item.name.titleize</tt>
     def to_s
-      klass = "navbar #{bar.name}"
+      root_element, options = *root_navbar_element
       if bar.empty?
-        helper.tag(:ul, { :class => klass }, false)
+        helper.tag(root_element, options, false)
       else
-        helper.content_tag :ul, { :class => klass } do
-          bar.items.map do |item|
-            render_nav_item item
+        helper.content_tag(root_element, options) do
+          helper.content_tag :ul do
+            bar.items.map do |item|
+              render_nav_item item
+            end
           end
         end
       end
@@ -65,6 +68,16 @@ module Xebec
     protected
     
     attr_reader :bar, :helper
+    
+    def root_navbar_element
+      klass = "#{bar.name}"
+      if helper.user_agent_supports_html5?
+        return :nav, { :class => klass }
+      else
+        klass << ' navbar'
+        return :div, { :class => klass }
+      end
+    end
     
     def render_nav_item(item)
       text = text_for_nav_item item

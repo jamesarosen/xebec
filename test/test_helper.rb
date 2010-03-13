@@ -7,6 +7,7 @@ require 'activesupport'
 require 'actionpack'
 require 'action_view'
 require 'action_controller'
+require 'action_controller/test_process'
 
 begin
   require 'redgreen/unicode'
@@ -32,6 +33,7 @@ Test::Unit::TestCase.class_eval do
   def new_nav_bar_helper
     ActionView::Base.new.tap do |helper|
       helper.extend Xebec::NavBarHelper
+      helper.request = ActionController::TestRequest.new
       helper.stubs(:current_page?).returns(false)
     end
   end

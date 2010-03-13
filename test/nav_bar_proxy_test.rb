@@ -37,16 +37,32 @@ class NavBarProxyTest < Test::Unit::TestCase
       assert !@proxy.respond_to?(:cromulize)
     end
     
-    should "render a navigation bar with the class 'navbar' and the bar's name" do
-      assert_select_from @proxy.to_s, "ul.navbar.elephants"
-    end
-    
-    context 'with an empty NavBar' do
-    
-      should 'render an empty navigation bar' do
-        assert_select_from @proxy.to_s, 'ul.navbar', /$^/
+    context 'for a browser that supports HTML5' do
+      setup { @proxy.stubs(:user_agent_supports_html5?).returns(true) }
+      
+      should "render a navigation bar with the bar's name" do
+        assert_select_from @proxy.to_s, "nav.elephants"
       end
       
+      context 'with an empty NavBar' do
+        should 'render an empty navigation bar' do
+          assert_select_from @proxy.to_s, 'nav', /$^/
+        end
+      end
+    end
+    
+    context 'for a browser that does not support HTML5' do
+      setup { @helper.stubs(:user_agent_supports_html5?).returns(false) }
+      
+      should "render a div.navbar the bar's name" do
+        assert_select_from @proxy.to_s, "div.navbar.elephants"
+      end
+      
+      context 'with an empty NavBar' do
+        should 'render an empty navigation bar' do
+          assert_select_from @proxy.to_s, 'div.navbar', /$^/
+        end
+      end
     end
     
     context 'with a NavBar that has a navigation item declared as a name' do
@@ -55,7 +71,7 @@ class NavBarProxyTest < Test::Unit::TestCase
         @bar.nav_item :foo
       end
       should 'render a navigation bar with the appropriate items' do
-        assert_select_from @proxy.to_s, 'ul.navbar' do
+        assert_select_from @proxy.to_s, 'ul' do
           assert_select 'li' do
             assert_select 'a[href="/foo"]', 'Foo'
           end
@@ -69,7 +85,7 @@ class NavBarProxyTest < Test::Unit::TestCase
         @bar.current = :foo
       end
       should 'render a navigation bar with the item marked as current' do
-        assert_select_from @proxy.to_s, 'ul.navbar' do
+        assert_select_from @proxy.to_s, 'ul' do
           assert_select 'li.current', 'Foo'
         end
       end
@@ -81,7 +97,7 @@ class NavBarProxyTest < Test::Unit::TestCase
         @bar.current = :baz
       end
       should 'render a navigation bar with the item not marked as current' do
-        assert_select_from @proxy.to_s, 'ul.navbar' do
+        assert_select_from @proxy.to_s, 'ul' do
           assert_select 'li', 'Foo'
           assert_select 'li.current', { :count => 0, :text=> 'Foo' }
         end
@@ -96,7 +112,7 @@ class NavBarProxyTest < Test::Unit::TestCase
         @bar.nav_item :foo, 'http://foo.com'
       end
       should 'render a navigation bar with the appropriate items' do
-        assert_select_from @proxy.to_s, 'ul.navbar' do
+        assert_select_from @proxy.to_s, 'ul' do
           assert_select 'li' do
             assert_select 'a[href="http://foo.com"]', 'Foo'
           end
@@ -111,21 +127,21 @@ class NavBarProxyTest < Test::Unit::TestCase
         @bar.nav_item :sign_up, '/sign_up'
       end
       should 'render a non-link navigation item' do
-        assert_select_from @proxy.to_s, 'ul.navbar' do
+        assert_select_from @proxy.to_s, 'ul' do
           assert_select 'li', 'Home' do
             assert_select 'a', 0
           end
         end
       end
       should 'render other items as links' do
-        assert_select_from @proxy.to_s, 'ul.navbar' do
+        assert_select_from @proxy.to_s, 'ul' do
           assert_select 'li' do
             assert_select 'a[href="/sign_up"]', 'Sign Up'
           end
         end
       end
       should 'add the "current" class to the current item' do
-        assert_select_from @proxy.to_s, 'ul.navbar' do
+        assert_select_from @proxy.to_s, 'ul' do
           assert_select 'li.current', 'Home'
         end
       end
@@ -138,7 +154,7 @@ class NavBarProxyTest < Test::Unit::TestCase
         @bar.nav_item :foo
       end
       should 'render a navigation bar using the internationalized text' do
-        assert_select_from @proxy.to_s, 'ul.navbar' do
+        assert_select_from @proxy.to_s, 'ul' do
           assert_select 'li' do
             assert_select 'a', 'My Foos'
           end

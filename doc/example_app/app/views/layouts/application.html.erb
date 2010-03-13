@@ -1,15 +1,20 @@
-<body>
-  <div id='header'>
-    <h1>My Site</h1>
-    <%= render :partial => '/layouts/site_nav_bar' %>
-  </div>
-  <%= nav_bar_unless_empty :area %>
-  <div id='content'>
-    <%= nav_bar_unless_empty :tabs %>
-    <%= yield %>
-  </div>
-  <div id='footer'>
-    &copy; 2293 My Happy Company
-    <%= nav_bar :footer %>
-  </div>
-</body>
+<html>
+  <head>
+    <%= add_html5_dom_elements_to_ie -%>
+  </head>
+  <body>
+    <div id='header'>
+      <h1>My Site</h1>
+      <%= render :partial => '/layouts/site_nav_bar' %>
+    </div>
+    <%= nav_bar_unless_empty :area %>
+    <div id='content'>
+      <%= nav_bar_unless_empty :tabs %>
+      <%= yield %>
+    </div>
+    <div id='footer'>
+      &copy; 2293 My Happy Company
+      <%= nav_bar :footer %>
+    </div>
+  </body>
+</html>
