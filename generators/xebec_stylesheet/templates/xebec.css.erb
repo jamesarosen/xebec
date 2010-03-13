@@ -1,0 +1,35 @@
+/*
+  Note the use of both <nav> and <div class='navbar'> elements.
+  <nav> is an HTML5 tag that browsers except IE suppor. By default,
+  Xebec will generate a <div class='navbar'> instead of a <nav>
+  element if it detects IE.
+  
+  @see Xebec::HTML5 for more information
+ */
+
+nav, div.navbar {
+  background-color: white;
+  color: blue;
+}
+
+nav :hover, nav .current,
+div.navbar :hover, div.navbar .current {
+  background-color: blue;
+  color: white;
+}
+
+<% navigation_bars.each do |bar| %>
+  nav.<%= bar -%>, div.navbar.<%= bar -%> {
+    /* styles specific to the <%= bar -%> navigation bar here */
+  }
+  
+    nav.<%= bar -%> .current, div.navbar.<%= bar -%> .current {
+      /* styles specific to the currently-selected element in
+         the <%= bar -%> navigation bar here */
+    }
+  
+    nav.<%= bar -%> :hover, div.navbar.<%= bar -%> :hover {
+      /* styles specific to a hovered-over element in
+         the <%= bar -%> navigation bar here */
+    }
+<% end %>

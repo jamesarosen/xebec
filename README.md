@@ -45,8 +45,10 @@ Add this to your `ApplicationController`:
     class ApplicationController < ActionController::Base
       helper Xebec::NavBarHelper
     end
+    
+### Building and Rendering Navigation Bars ###
 
-### Rendering a Navigation Bar ###
+#### Rendering a Navigation Bar ####
 
 To render a navigation bar, render `nav_bar` in your view, passing the name of the bar:
 
@@ -62,7 +64,7 @@ If you only have one navigation bar on your site, you can leave off the name, li
     
 Xebec will assign this navigation bar the name `:default` in case you need to refer to it elsewhere, but you probably won't.
 
-### Populating a Navigation Bar ###
+#### Populating a Navigation Bar ####
 
 To add items to your navigation bar in a view, call `nav_bar` with a block containing any number of `nav_item` calls:
 
@@ -73,23 +75,25 @@ To add items to your navigation bar in a view, call `nav_bar` with a block conta
       end
     %>
     
-### Highlighting the "Current" Element of a Navigation Bar ###
-
-The `nav_bar` helper method will add the "current" class to the currently-selected item of each navigation bar. Highlighting the item requires just some basic CSS:
-
-    ul.navbar { color: green; }
-    ul.navbar li.current { color: purple; }
-    
-Each rendered navigation bar will include its name as a CSS class if you want to style them differently:
-
-    ul.navbar.site { color: green; }
-    ul.navbar.area { color: white; background-color: green; }
-    
-### Setting the "Current" Element of a Navigation Bar ###
+#### Setting the "Current" Element of a Navigation Bar ####
 
 A navigation bar will automatically set an item as selected if its URL matches the current page URL. That will work for pages like "FAQ" above, but what if you want "Projects" to be highlighted not only for the projects list page but also for any page in the "Projects" area, such as an individual project's "Budget" tab? You can manually set the *current* item in a navigation bar like so:
 
     <% nav_bar(:area).current = :projects %>
+    
+### Styling Navigation Bars ###
+
+Xebec provides a stylesheet generator to build you some reasonably sane default styles. Call it from the command line with a list of the names of your navigation bars:
+
+    script/generate xebec_stylesheet site area tabs footer
+
+Then you'll have to add the `xebec` stylesheet to your layout:
+
+    <head>
+      <%= stylesheet_link_tag :xebec, :media => :screen %>
+    </head>
+
+See `Xebec::StylesheetGenerator` for more information about how to customize the generated stylesheet.
 
 ### Example Application ###
 
