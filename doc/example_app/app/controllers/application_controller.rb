@@ -2,9 +2,6 @@
 # many features of Xebec.
 class ApplicationController < ActionController::Base
   
-  # Add Xebec's view helper methods:
-  helper Xebec::NavBarHelper
-  
   # If you prefer to declare your navigation in your
   # controllers, start by including Xebec's controller support:
   include Xebec::ControllerSupport
