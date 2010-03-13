@@ -95,6 +95,20 @@ class NavBarProxyTest < Test::Unit::TestCase
           assert_select 'li.current', 'Foo'
         end
       end
+      context 'when Xebec is configured to use a different "current" class' do
+        setup do
+          @old_class = Xebec.currently_selected_nav_item_class
+          Xebec.currently_selected_nav_item_class = 'active'
+        end
+        should 'use the configured CSS class' do
+          assert_select_from @proxy.to_s, 'ul' do
+            assert_select 'li.active', 'Foo'
+          end
+        end
+        teardown do
+          Xebec.currently_selected_nav_item_class = @old_class
+        end
+      end
     end
     
     context 'with a NavBar that has a navigation item not set as current' do
