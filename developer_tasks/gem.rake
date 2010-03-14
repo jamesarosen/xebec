@@ -20,7 +20,7 @@ namespace :gem do
   
   task :push do
     command = ('gem push')
-    command << " -p $#{ENV['http_proxy']}" if ENV['http_proxy']
+    command << " -p $#{ENV['http_proxy']}" if ENV['http_proxy'] && !ENV['http_proxy'].empty?
     command << " #{latest_gem}"
     puts "Pushing gem..."
     IO.popen(command) { |io| io.each { |line| puts '  ' + line } }
