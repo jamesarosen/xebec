@@ -64,7 +64,8 @@ Gem::Specification.new do |s|
      "test/nav_bar_renderer_test.rb",
      "test/nav_bar_test.rb",
      "test/test_helper.rb",
-     "test/web_app_theme_renderer_test.rb"
+     "test/web_app_theme_renderer_test.rb",
+     "xebec.gemspec"
   ]
   s.homepage = %q{http://github.com/jamesarosen/xebec}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Xebec Documentation", "--charset", "utf-8"]
