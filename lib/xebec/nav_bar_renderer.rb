@@ -90,8 +90,9 @@ module Xebec
     def render_nav_item(item)
       text = text_for_nav_item item
       href = href_for_nav_item item
-      options = is_current_nav_item?(item, href) ? { :class => Xebec.currently_selected_nav_item_class } : {}
-      helper.content_tag :li, options do
+      klass = item.name.to_s
+      klass << " #{Xebec.currently_selected_nav_item_class}" if is_current_nav_item?(item, href)
+      helper.content_tag :li, :class => klass do
         helper.link_to_unless_current text, href
       end
     end

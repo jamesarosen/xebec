@@ -78,7 +78,7 @@ class NavBarRendererTest < Test::Unit::TestCase
       end
       should 'render a navigation bar with the appropriate items' do
         assert_select_from @renderer.to_s, 'ul' do
-          assert_select 'li' do
+          assert_select 'li.foo' do
             assert_select 'a[href="/foo"]', 'Foo'
           end
         end
@@ -92,7 +92,7 @@ class NavBarRendererTest < Test::Unit::TestCase
       end
       should 'render a navigation bar with the item marked as current' do
         assert_select_from @renderer.to_s, 'ul' do
-          assert_select 'li.current', 'Foo'
+          assert_select 'li.foo.current', 'Foo'
         end
       end
       context 'when Xebec is configured to use a different "current" class' do
@@ -102,7 +102,7 @@ class NavBarRendererTest < Test::Unit::TestCase
         end
         should 'use the configured CSS class' do
           assert_select_from @renderer.to_s, 'ul' do
-            assert_select 'li.active', 'Foo'
+            assert_select 'li.foo.active', 'Foo'
           end
         end
         teardown do
@@ -119,7 +119,7 @@ class NavBarRendererTest < Test::Unit::TestCase
       should 'render a navigation bar with the item not marked as current' do
         assert_select_from @renderer.to_s, 'ul' do
           assert_select 'li', 'Foo'
-          assert_select 'li.current', { :count => 0, :text=> 'Foo' }
+          assert_select 'li.foo.current', { :count => 0, :text=> 'Foo' }
         end
       end
       should 'not render an empty "class" attribute' do
@@ -133,7 +133,7 @@ class NavBarRendererTest < Test::Unit::TestCase
       end
       should 'render a navigation bar with the appropriate items' do
         assert_select_from @renderer.to_s, 'ul' do
-          assert_select 'li' do
+          assert_select 'li.foo' do
             assert_select 'a[href="http://foo.com"]', 'Foo'
           end
         end
@@ -148,21 +148,21 @@ class NavBarRendererTest < Test::Unit::TestCase
       end
       should 'render a non-link navigation item' do
         assert_select_from @renderer.to_s, 'ul' do
-          assert_select 'li', 'Home' do
+          assert_select 'li.home', 'Home' do
             assert_select 'a', 0
           end
         end
       end
       should 'render other items as links' do
         assert_select_from @renderer.to_s, 'ul' do
-          assert_select 'li' do
+          assert_select 'li.sign_up' do
             assert_select 'a[href="/sign_up"]', 'Sign Up'
           end
         end
       end
       should 'add the "current" class to the current item' do
         assert_select_from @renderer.to_s, 'ul' do
-          assert_select 'li.current', 'Home'
+          assert_select 'li.home.current', 'Home'
         end
       end
     end
@@ -175,7 +175,7 @@ class NavBarRendererTest < Test::Unit::TestCase
       end
       should 'render a navigation bar using the internationalized text' do
         assert_select_from @renderer.to_s, 'ul' do
-          assert_select 'li' do
+          assert_select 'li.foo' do
             assert_select 'a', 'My Foos'
           end
         end
