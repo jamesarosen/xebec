@@ -37,12 +37,12 @@ module Xebec
     #   defined, use that value
     # * else, use <tt>nav_item.name.titleize</tt>
     def to_s
-      root_element, options = *root_navbar_element
+      root_element, options = *root_navbar_tag
       if bar.empty?
         helper.tag(root_element, options, false)
       else
         helper.content_tag(root_element, options) do
-          helper.content_tag :ul do
+          helper.content_tag(*list_tag) do
             bar.items.map do |item|
               render_nav_item item
             end
@@ -69,7 +69,7 @@ module Xebec
     
     attr_reader :bar, :helper
     
-    def root_navbar_element
+    def root_navbar_tag
       html_attributes = bar.html_attributes
       html_attributes[:class] ||= ''
       (html_attributes[:class] << " #{bar.name}").strip!
@@ -79,6 +79,12 @@ module Xebec
         html_attributes[:class] << " navbar"
         return :div, html_attributes
       end
+    end
+    
+    # @return the first two arguments to a <tt>content_tag</tt> call --
+    #         the name and HTML properties of the tag
+    def list_tag
+      return :ul, {}
     end
     
     def render_nav_item(item)
