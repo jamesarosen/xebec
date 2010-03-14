@@ -18,7 +18,7 @@ namespace :gem do
     puts "Jeweler not available. Install it with [sudo] gem install jeweler -s http://gemscutter.org"
   end
   
-  task :push do
+  task :push => 'gem:build' do
     command = ('gem push')
     command << " -p $#{ENV['http_proxy']}" if ENV['http_proxy'] && !ENV['http_proxy'].empty?
     command << " #{latest_gem}"
