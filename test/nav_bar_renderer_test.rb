@@ -92,7 +92,7 @@ class NavBarRendererTest < Test::Unit::TestCase
       end
       should 'render a navigation bar with the item marked as current' do
         assert_select_from @renderer.to_s, 'ul' do
-          assert_select 'li.foo.current', 'Foo'
+          assert_select 'li.foo.current span', 'Foo'
         end
       end
       context 'when Xebec is configured to use a different "current" class' do
@@ -102,7 +102,7 @@ class NavBarRendererTest < Test::Unit::TestCase
         end
         should 'use the configured CSS class' do
           assert_select_from @renderer.to_s, 'ul' do
-            assert_select 'li.foo.active', 'Foo'
+            assert_select 'li.foo.active span', 'Foo'
           end
         end
         teardown do
@@ -162,7 +162,7 @@ class NavBarRendererTest < Test::Unit::TestCase
       end
       should 'add the "current" class to the current item' do
         assert_select_from @renderer.to_s, 'ul' do
-          assert_select 'li.home.current', 'Home'
+          assert_select 'li.home.current span', 'Home'
         end
       end
     end

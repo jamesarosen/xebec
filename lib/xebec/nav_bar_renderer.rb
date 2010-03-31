@@ -12,7 +12,7 @@ module Xebec
     # render the NavBar as an HTML list.
     #
     # @param [Xebec::NavBar] bar the navigation bar to renderer
-    # @param [#tag AND #content_tag AND #link_to] helper the ActionView helper
+    # @param [#tag AND #content_tag AND #link_to AND #current_page?] helper the ActionView helper
     def initialize(bar, helper)
       raise ArgumentError.new("#{bar || '<nil>'} is not a NavBar") unless bar.kind_of?(NavBar)
       raise ArgumentError.new("#{helper || '<nil>'} does not seem to be a view helper") unless
@@ -90,10 +90,15 @@ module Xebec
     def render_nav_item(item)
       text = text_for_nav_item item
       href = href_for_nav_item item
+      is_current = is_current_nav_item?(item, href)
       klass = item.name.to_s
-      klass << " #{Xebec.currently_selected_nav_item_class}" if is_current_nav_item?(item, href)
+      klass << " #{Xebec.currently_selected_nav_item_class}" if is_current
       helper.content_tag :li, :class => klass do
-        helper.link_to_unless_current text, href
+        if is_current
+          helper.content_tag :span, text
+        else  
+          helper.link_to text, href
+        end
       end
     end
     
