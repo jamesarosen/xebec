@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{xebec}
-  s.version = "2.4.0"
+  s.version = "2.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["James A. Rosen"]
@@ -55,6 +55,7 @@ Gem::Specification.new do |s|
      "lib/xebec/nav_bar_renderer.rb",
      "lib/xebec/nav_item.rb",
      "lib/xebec/stylesheet_generator.rb",
+     "lib/xebec/title_enhanced_nav_bar_renderer.rb",
      "lib/xebec/web_app_theme_renderer.rb",
      "rails/init.rb",
      "tasks/README.md",
@@ -64,6 +65,7 @@ Gem::Specification.new do |s|
      "test/nav_bar_renderer_test.rb",
      "test/nav_bar_test.rb",
      "test/test_helper.rb",
+     "test/title_enhanced_nav_bar_renderer_test.rb",
      "test/web_app_theme_renderer_test.rb",
      "xebec.gemspec"
   ]
@@ -79,6 +81,7 @@ Gem::Specification.new do |s|
      "test/nav_bar_renderer_test.rb",
      "test/nav_bar_test.rb",
      "test/test_helper.rb",
+     "test/title_enhanced_nav_bar_renderer_test.rb",
      "test/web_app_theme_renderer_test.rb"
   ]
 
