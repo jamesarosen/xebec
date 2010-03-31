@@ -13,6 +13,19 @@ class NavBarHelperTest < Test::Unit::TestCase
       assert @helper.nav_bar.kind_of?(Xebec::NavBarRenderer)
     end
     
+    should 'use a custom renderer class if one is set' do
+      begin
+        @old_renderer_class = Xebec::renderer_class
+        klass = Class.new do
+          def initialize(*args, &block); end;
+        end
+        Xebec::renderer_class = klass
+        assert @helper.nav_bar.kind_of?(klass)
+      ensure
+        Xebec::renderer_class = @old_renderer_class
+      end
+    end
+    
     should 'return a NavBar with the given name' do
       assert_equal :snacks, @helper.nav_bar(:snacks).name
     end

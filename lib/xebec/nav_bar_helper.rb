@@ -66,7 +66,7 @@ EOS
     def look_up_nav_bar(name, html_attributes)
       bar = super(name, html_attributes)
       if bar.kind_of?(Xebec::NavBar)
-        bar = nav_bars[bar.name] = NavBarRenderer.new(bar, self)
+        bar = nav_bars[bar.name] = Xebec::renderer_class.new(bar, self)
       end
       bar
     end
