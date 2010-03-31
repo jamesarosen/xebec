@@ -15,20 +15,8 @@ module Xebec
     
     protected
     
-    def render_nav_item(item)
-      text  = text_for_nav_item item
-      title = title_for_nav_item item, text
-      href  = href_for_nav_item item
-      is_current = is_current_nav_item?(item, href)
-      klass = item.name.to_s
-      klass << " #{Xebec.currently_selected_nav_item_class}" if is_current
-      helper.content_tag :li, :class => klass, :title => title do
-        if is_current
-          helper.content_tag :span, text
-        else  
-          helper.link_to text, href
-        end
-      end
+    def list_item_tag(item, klass, text, href, is_current)
+      return :li, :class => klass, :title => title_for_nav_item(item, text)
     end
 
     def text_for_nav_item(item)
