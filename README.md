@@ -103,6 +103,10 @@ See `Xebec::StylesheetGenerator` for more information about how to customize the
 
 To see the full range of features that Xebec supports, including internationalization and `before_filter`s for your controllers, check out the example application in `doc/example_app/`.
 
+### Extras
+
+Check out `Xebec::WebAppThemeRenderer` if you're using [Andrea Franz's web-app-theme](http://github.com/pilu/web-app-theme). Check out `Xebec::TitleEnhancedNavBarRenderer` if you want to give your navigation items both content and a tooltip title.
+
 ## What's a *xebec*? ##
 
 Apple's dictionary provides the following entry:
