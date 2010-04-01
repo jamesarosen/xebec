@@ -111,6 +111,23 @@ class NavBarRendererTest < Test::Unit::TestCase
       end
     end
     
+    context 'with a NavBar that has a NavItem with a String name' do
+      setup do
+        @bar.nav_item 'foo', '/foo'
+        @bar.current = :foo
+      end
+      should 'still mark the item as current if a Symbol is used' do
+        assert_select_from @renderer.to_s, 'ul' do
+          assert_select 'li.foo.current span', 'Foo'
+        end
+      end
+      should 'not modify the NavItem itself' do
+        original_text = @bar.items.first.name.dup
+        @renderer.to_s
+        assert_equal original_text, @bar.items.first.name.dup
+      end
+    end
+    
     context 'with a NavBar that has a navigation item not set as current' do
       setup do
         @bar.nav_item :foo, '/foo'

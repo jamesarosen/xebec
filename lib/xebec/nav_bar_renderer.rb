@@ -91,7 +91,7 @@ module Xebec
       text = text_for_nav_item item
       href = href_for_nav_item item
       is_current = is_current_nav_item?(item, href)
-      klass = item.name.to_s
+      klass = '' << item.name.to_s
       klass << " #{Xebec.currently_selected_nav_item_class}" if is_current
       helper.content_tag(*list_item_tag(item, klass, text, href, is_current)) do
         if is_current
@@ -124,8 +124,8 @@ module Xebec
     end
     
     def is_current_nav_item?(item, href)
-      current = bar.current
-      current == item.name || current.blank? && helper.current_page?(href)
+      current = bar.current.to_s
+      current == item.name.to_s || current.blank? && helper.current_page?(href)
     end
     
   end
