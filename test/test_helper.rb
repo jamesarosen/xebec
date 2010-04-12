@@ -11,7 +11,7 @@ require 'action_controller/test_process'
 
 begin
   require 'redgreen/unicode'
-rescue
+rescue MissingSourceFile
   require 'redgreen'
 end
 
