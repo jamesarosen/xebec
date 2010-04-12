@@ -31,8 +31,8 @@ module Xebec
     # @see Xebec::HasNavBars#nav_bar
     #
     # @return [Xebec::NavBarRenderer]
-    def nav_bar(name = nil, html_attributes = {}, &block)
-      look_up_nav_bar_and_eval name, html_attributes, &block
+    def nav_bar(name = nil, html_attributes = {}, options = {}, &block)
+      look_up_nav_bar_and_eval name, html_attributes, options, &block
     end
     
     # Renders a navigation bar if and only if it contains any
@@ -63,10 +63,11 @@ EOS
     
     # Override HasNavBars#look_up_nav_bar to replace with a
     # renderer if necessary.
-    def look_up_nav_bar(name, html_attributes)
+    def look_up_nav_bar(name, html_attributes, options = {})
       bar = super(name, html_attributes)
       if bar.kind_of?(Xebec::NavBar)
-        bar = nav_bars[bar.name] = Xebec::renderer_class.new(bar, self)
+        renderer_class = options[:renderer_class] || Xebec::renderer_class
+        bar = nav_bars[bar.name] = renderer_class.new(bar, self)
       end
       bar
     end
