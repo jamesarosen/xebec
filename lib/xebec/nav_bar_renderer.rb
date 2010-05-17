@@ -45,7 +45,7 @@ module Xebec
           helper.content_tag(*list_tag) do
             bar.items.map do |item|
               render_nav_item item
-            end
+            end.join("")
           end
         end
       end
