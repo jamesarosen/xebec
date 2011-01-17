@@ -59,7 +59,7 @@ class NavBarHelperTest < Test::Unit::TestCase
     
     should "evaluate a block in the helper's scope" do
       @helper.expects(:zoink!)
-      @helper.nav_bar do
+      @helper.nav_bar do |bar|
         zoink!
       end
     end

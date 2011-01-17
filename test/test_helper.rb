@@ -1,6 +1,10 @@
+ENV["RAILS_ENV"] = "test"
+require 'rubygems'
+require 'bundler'
+Bundler.setup
+
 require 'test/unit'
 require 'test/unit/testcase'
-require 'rubygems'
 require 'shoulda'
 require 'mocha'
 require 'activesupport'
@@ -8,12 +12,6 @@ require 'actionpack'
 require 'action_view'
 require 'action_controller'
 require 'action_controller/test_process'
-
-begin
-  require 'redgreen/unicode'
-rescue MissingSourceFile
-  require 'redgreen'
-end
 
 [['..', 'lib'], ['lib']].each do |lib_dir|
   lib_path = File.expand_path(File.join(File.dirname(__FILE__), *lib_dir))
@@ -46,6 +44,6 @@ Test::Unit::TestCase.class_eval do
     hash = key.to_s.split('.').reverse.inject(value) do |value, key_part|
       { key_part.to_sym => value }
     end
-    I18n.backend.send :merge_translations, I18n.locale, hash
+    I18n.backend.send :store_translations, I18n.locale, hash
   end
 end

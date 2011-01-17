@@ -53,7 +53,7 @@ module Xebec
     # @see Xebec::HTML5
     def add_html5_dom_elements_to_ie
       return <<-EOS
-<!--[if IE]>
+<!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 EOS
