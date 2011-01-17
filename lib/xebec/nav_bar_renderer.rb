@@ -43,9 +43,9 @@ module Xebec
       else
         helper.content_tag(root_element, options) do
           helper.content_tag(*list_tag) do
-            bar.items.map do |item|
-              render_nav_item item
-            end.join("")
+            bar.items.inject(''.html_safe) do |content, item|
+              content << render_nav_item(item)
+            end
           end
         end
       end

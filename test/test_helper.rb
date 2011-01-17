@@ -7,11 +7,11 @@ require 'test/unit'
 require 'test/unit/testcase'
 require 'shoulda'
 require 'mocha'
-require 'activesupport'
-require 'actionpack'
+require 'active_support'
+require 'action_pack'
 require 'action_view'
 require 'action_controller'
-require 'action_controller/test_process'
+require 'action_dispatch'
 
 [['..', 'lib'], ['lib']].each do |lib_dir|
   lib_path = File.expand_path(File.join(File.dirname(__FILE__), *lib_dir))
@@ -21,7 +21,7 @@ end
 require 'xebec'
 
 Test::Unit::TestCase.class_eval do
-  include ActionController::Assertions::SelectorAssertions
+  include ActionDispatch::Assertions::SelectorAssertions
 
   def assert_select_from(text, *args, &block)
     @selected = HTML::Document.new(text).root.children
@@ -31,7 +31,7 @@ Test::Unit::TestCase.class_eval do
   def new_nav_bar_helper
     ActionView::Base.new.tap do |helper|
       helper.extend Xebec::NavBarHelper
-      helper.request = ActionController::TestRequest.new
+      helper.request = ActionDispatch::TestRequest.new
       helper.stubs(:current_page?).returns(false)
     end
   end

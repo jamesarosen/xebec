@@ -92,16 +92,16 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<shoulda>, ["~> 2.10.3"])
       s.add_development_dependency(%q<mocha>, ["~> 0.9.8"])
-      s.add_development_dependency(%q<rails>, ["~> 2.3.8"])
+      s.add_development_dependency(%q<rails>, ["~> 3.0"])
     else
       s.add_dependency(%q<shoulda>, ["~> 2.10.3"])
       s.add_dependency(%q<mocha>, ["~> 0.9.8"])
-      s.add_dependency(%q<rails>, ["~> 2.3.8"])
+      s.add_dependency(%q<rails>, ["~> 3.0"])
     end
   else
     s.add_dependency(%q<shoulda>, ["~> 2.10.3"])
     s.add_dependency(%q<mocha>, ["~> 0.9.8"])
-    s.add_dependency(%q<rails>, ["~> 2.3.8"])
+    s.add_dependency(%q<rails>, ["~> 3.0"])
   end
 end
 

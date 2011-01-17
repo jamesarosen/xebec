@@ -199,6 +199,17 @@ class NavBarRendererTest < Test::Unit::TestCase
       end
     end
 
+    context 'with a NavBar that has several nav items' do
+      setup do
+        @bar.nav_item :foo, '/foo'
+        @bar.nav_item :bar, '/bar'
+      end
+
+      should 'return an HTML-safe navigation bar' do
+        assert @renderer.to_s.html_safe?
+      end
+    end
+
   end
 
 end

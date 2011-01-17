@@ -6,6 +6,7 @@ class ControllerSupportTest < Test::Unit::TestCase
   def setup
     @controller_class = Class.new(ActionController::Base).tap do |c|
       c.instance_eval do
+        include ActionController::Testing
         include Xebec::ControllerSupport
         def public_nav_bar(*args, &block)
           nav_bar(*args, &block)
@@ -16,9 +17,7 @@ class ControllerSupportTest < Test::Unit::TestCase
   end
 
   def call_before_filters
-    @controller_class.before_filters.each do |filter|
-      filter.call(@controller)
-    end
+    @controller.run_callbacks(:process_action)
   end
 
   context 'ControllerSupport::ClassMethods#nav_bar' do
