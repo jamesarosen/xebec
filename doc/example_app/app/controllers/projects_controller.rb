@@ -1,11 +1,11 @@
 # Part of an example application showing the
 # many features of Xebec.
 class ProjectsController < ApplicationController
-  
+
   # set the selected item for the :area navigation bar
   # for all actions in this controller:
   nav_bar(:area) { |nb| nb.current = :projects }
-  
+
   def index
     params[:sort] ||= 'recent'
     # set up tabs for the project-list view:
@@ -16,26 +16,26 @@ class ProjectsController < ApplicationController
     end
     @projects = Project.ordered_by(params[:sort])
   end
-  
+
   def show(selected_tab = :overview)
     @project = Project.find(params[:id])
     prepare_project_tabs selected_tab
   end
-  
+
   def budget
     show :budget
   end
-  
+
   def history
     show :history
   end
-  
+
   def edit
     show :edit
   end
-  
+
   protected
-  
+
   # Extract navigation bar setup that is common to
   # multiple methods:
   def prepare_project_tabs(selected)
@@ -47,5 +47,5 @@ class ProjectsController < ApplicationController
       nb.current = selected
     end
   end
-  
+
 end

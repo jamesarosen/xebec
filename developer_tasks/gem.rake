@@ -17,7 +17,7 @@ namespace :gem do
   rescue LoadError
     puts "Jeweler not available. Install it with [sudo] gem install jeweler -s http://gemscutter.org"
   end
-  
+
   task :push => 'gem:build' do
     command = ('gem push')
     command << " -p $#{ENV['http_proxy']}" if ENV['http_proxy'] && !ENV['http_proxy'].empty?
@@ -25,7 +25,7 @@ namespace :gem do
     puts "Pushing gem..."
     IO.popen(command) { |io| io.each { |line| puts '  ' + line } }
   end
-  
+
   def latest_gem
     result = File.expand_path(Dir.glob(File.join(File.dirname(__FILE__), '..', 'pkg', '*.gem')).sort.last)
     abort "No gems found in pkg/. Did you run gem:build?" if result.nil?

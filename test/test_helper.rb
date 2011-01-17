@@ -22,12 +22,12 @@ require 'xebec'
 
 Test::Unit::TestCase.class_eval do
   include ActionController::Assertions::SelectorAssertions
-  
+
   def assert_select_from(text, *args, &block)
     @selected = HTML::Document.new(text).root.children
     assert_select(*args, &block)
   end
-  
+
   def new_nav_bar_helper
     ActionView::Base.new.tap do |helper|
       helper.extend Xebec::NavBarHelper
@@ -35,7 +35,7 @@ Test::Unit::TestCase.class_eval do
       helper.stubs(:current_page?).returns(false)
     end
   end
-  
+
   def clear_translations!
     I18n.reload!
   end

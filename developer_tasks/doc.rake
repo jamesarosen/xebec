@@ -4,13 +4,13 @@ task :doc => ['doc:generate']
 namespace :doc do
   project_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
   doc_destination = File.join(project_root, 'doc', 'rdoc')
-  
+
   begin
     require 'yard'
     require 'yard/rake/yardoc_task'
 
     YARD::Rake::YardocTask.new(:generate) do |yt|
-      yt.files   = Dir.glob(File.join(project_root, '{lib,doc/example_app}', '**', '*.rb')) + 
+      yt.files   = Dir.glob(File.join(project_root, '{lib,doc/example_app}', '**', '*.rb')) +
                    [ File.join(project_root, 'README.md') ]
       yt.options = ['--output-dir', doc_destination, '--readme', 'README.md']
     end
@@ -25,5 +25,5 @@ namespace :doc do
   task :clean do
     rm_r doc_dir if File.exists?(doc_destination)
   end
-  
+
 end

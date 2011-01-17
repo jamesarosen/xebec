@@ -1,16 +1,16 @@
 require 'xebec/nav_item'
 
 module Xebec
-  
+
   class NavBar
-    
+
     DEFAULT_NAME = :default
-    
+
     attr_reader :name
     attr_reader :items
     attr_reader :html_attributes
     attr_accessor :current
-    
+
     # Create a new NavBar object.
     #
     # @param [String] name the name of the navigation bar; defaults to :default
@@ -22,7 +22,7 @@ module Xebec
       @items = []
       @current = nil
     end
-    
+
     # Add a navigation item to this bar.
     #
     # @param [String, Symbol] name the name of the item
@@ -36,19 +36,19 @@ module Xebec
     def nav_item(name, href = nil)
       items << Xebec::NavItem.new(name, href)
     end
-    
+
     def empty?
       items.empty?
     end
-    
+
     def to_s
       "<NavBar #{name}>"
     end
-    
+
     def inspect
       "<NavBar #{name}: #{items.map(&:name).join('|')}>"
     end
-    
+
   end
-  
+
 end

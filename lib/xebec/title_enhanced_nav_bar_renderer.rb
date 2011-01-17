@@ -1,7 +1,7 @@
 require 'xebec/nav_bar_renderer'
 
 module Xebec
-  
+
   # Replaces the default Xebec::NavBarRenderer with a version
   # that supports separate "text" and "title" internationalization
   # options for each navigation item. Instead of
@@ -12,9 +12,9 @@ module Xebec
   #
   # @see Xebec::NavBarRenderer
   class TitleEnhancedNavBarRenderer < ::Xebec::NavBarRenderer
-    
+
     protected
-    
+
     def list_item_tag(item, klass, text, href, is_current)
       return :li, :class => klass, :title => title_for_nav_item(item, text)
     end
@@ -23,14 +23,14 @@ module Xebec
       item_name = item.name
       I18n.t "navbar.#{bar.name}.#{item_name}.text",  :default => item_name.to_s.titleize
     end
-    
+
     def title_for_nav_item(item, text)
       item_name = item.name
       I18n.t "navbar.#{bar.name}.#{item_name}.title", :default => text
     end
-    
+
   end
-  
+
 end
 
 Xebec::renderer_class = Xebec::TitleEnhancedNavBarRenderer

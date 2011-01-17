@@ -3,12 +3,12 @@ require 'xebec/nav_bar_renderer'
 require 'xebec/has_nav_bars'
 
 module Xebec
-  
+
   module NavBarHelper
-    
+
     include Xebec::HasNavBars
     include Xebec::HTML5
-    
+
     # If called in an output expression ("<%= navbar %>" in ERB
     # or "=navbar" in HAML), renders the navigation bar.
     #
@@ -17,7 +17,7 @@ module Xebec
     #   # => <ul class="navbar tabs">...</ul>
     #
     # @see Xebec::NavBarRenderer#to_s
-    # 
+    #
     # If called with a block, yields the underlying NavBar for
     # modification.
     #
@@ -34,7 +34,7 @@ module Xebec
     def nav_bar(name = nil, html_attributes = {}, options = {}, &block)
       look_up_nav_bar_and_eval name, html_attributes, options, &block
     end
-    
+
     # Renders a navigation bar if and only if it contains any
     # navigation items. Unlike +nav_bar+, this method does not
     # accept a block.
@@ -44,7 +44,7 @@ module Xebec
       bar = look_up_nav_bar name, html_attributes
       bar.empty? ? '' : bar
     end
-    
+
     # Renders a <tt>&lt;script></tt> tag that preloads HTML5
     # tags in IE. Useful if you called
     # <tt>Xebec.html5_for_all_browsers!</tt> in your
@@ -58,9 +58,9 @@ module Xebec
 <![endif]-->
 EOS
     end
-    
+
     protected
-    
+
     # Override HasNavBars#look_up_nav_bar to replace with a
     # renderer if necessary.
     def look_up_nav_bar(name, html_attributes, options = {})
@@ -71,7 +71,7 @@ EOS
       end
       bar
     end
-    
+
   end
-  
+
 end
