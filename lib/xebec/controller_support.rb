@@ -1,20 +1,20 @@
 require 'xebec/has_nav_bars'
 
 module Xebec
-  
+
   # Include this module in Rails controllers if you want to declare
   # navigation bars in your controllers instead of or in addition to
   # in your views.
   module ControllerSupport
-    
+
     def self.included(base)
       base.extend Xebec::ControllerSupport::ClassMethods
       base.send :include, Xebec::ControllerSupport::InstanceMethods
       base.send :include, Xebec::HasNavBars
     end
-    
+
     module ClassMethods
-      
+
       # Declare and populate a navigation bar. This method
       # is a shorthand for creating a +before_filter+ that looks
       # up and populates a navigation bar.
@@ -45,11 +45,11 @@ module Xebec
         end
         nil
       end
-      
+
     end
-    
+
     module InstanceMethods
-      
+
       # Declare and populate a navigation bar.
       #
       # @param [String, Symbol] name the name of the navigation bar
@@ -57,7 +57,7 @@ module Xebec
       # @yield [Xebec::NavBar] nav_bar the navigation bar. The block
       #                        is evaluated in the scope of the
       #                        controller instance.
-      # 
+      #
       # @return [Xebec::NavBar]
       #
       # @example
@@ -69,9 +69,9 @@ module Xebec
       def nav_bar(name = Xebec::NavBar::DEFAULT_NAME, &block)
         look_up_nav_bar_and_eval name, &block
       end
-      
+
     end
-    
+
   end
-  
+
 end

@@ -1,9 +1,9 @@
 module Xebec
-  
+
   class NavItem
-    
+
     attr_reader :name, :href
-    
+
     # Create a new navigation item.
     #
     # @param [String, Symbol] name the name of the item
@@ -15,7 +15,7 @@ module Xebec
       raise ArgumentError.new("#{name || '<nil>'} is not a valid name for a navigation item") if name.blank?
       @name, @href = name, href
     end
-    
+
   end
-  
+
 end

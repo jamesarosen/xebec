@@ -1,9 +1,9 @@
 module Xebec
-  
+
   def self.html5_for_all_browsers!
     Xebec::HTML5.force = true
   end
-  
+
   # Xebec will help you transition your site to HTML 5
   # by using the <tt>&lt;nav></tt> element like so:
   #
@@ -29,7 +29,7 @@ module Xebec
   # That, unfortunately messes with your CSS selectors. Xebec,
   # therefore, has a slightly more intelligent default behavior.
   # If it detects a browser that does not support HTML5 elements,
-  # it will replace the <tt>&lt;nav></tt> element with a 
+  # it will replace the <tt>&lt;nav></tt> element with a
   # <tt>&lt;div class='navbar'></tt>.
   #
   # Some enterprising folks have found a workaround for IE, however.
@@ -45,19 +45,19 @@ module Xebec
   # @see Xebec::NavBarHelper.add_html5_dom_elements_to_ie
   # See also the example application.
   module HTML5
-    
+
     class <<self
       attr_accessor :force
     end
     self.force = false
-    
+
     NON_HTML_5_USER_AGENTS = /msie/i
-    
+
     def user_agent_supports_html5?
       return true if Xebec::HTML5.force
       return !(NON_HTML_5_USER_AGENTS === request.user_agent)
     end
-    
+
   end
-  
+
 end
