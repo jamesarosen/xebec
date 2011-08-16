@@ -97,7 +97,7 @@ module Xebec
         if is_current
           helper.content_tag :span, text
         else
-          helper.link_to text, href
+          helper.link_to text, href, item.html_options
         end
       end
     end
