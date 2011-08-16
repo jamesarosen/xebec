@@ -27,14 +27,15 @@ module Xebec
     #
     # @param [String, Symbol] name the name of the item
     # @param [String, Proc] href the URL of the item; optional
+    # @param [Hash] html_options additional html_options to be passed to link_to
     #
     # To customize the link text, set the internationalization key
     # <tt>navbar.{{nav bar name}}.{{nav item name}}</tt>.
     #
     # @see Xebec::NavBarHelper#nav_bar
     # @see Xebec::NavBarProxy#to_s
-    def nav_item(name, href = nil)
-      items << Xebec::NavItem.new(name, href)
+    def nav_item(name, href = nil, html_options = {})
+      items << Xebec::NavItem.new(name, href, html_options)
     end
 
     def empty?

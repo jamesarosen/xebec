@@ -156,6 +156,19 @@ class NavBarRendererTest < Test::Unit::TestCase
         end
       end
     end
+    
+    context 'with a NavBar that has a navigation item with html_options' do
+      setup do
+        @bar.nav_item :foo, 'http://foo.com', :method => :delete
+      end
+      should 'render a navigation bar with the appropriate items' do
+        assert_select_from @renderer.to_s, 'ul' do
+          assert_select 'li.foo' do
+            assert_select 'a[href="http://foo.com"][data-method=delete]', 'Foo'
+          end
+        end
+      end
+    end
 
     context 'with a NavBar that has a navigation item that links to the current page' do
       setup do
