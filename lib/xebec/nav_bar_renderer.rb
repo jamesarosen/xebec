@@ -44,7 +44,12 @@ module Xebec
         helper.content_tag(root_element, options) do
           helper.content_tag(*list_tag) do
             bar.items.inject(''.html_safe) do |content, item|
-              content << render_nav_item(item)
+              case item
+              when NavItem
+                content << render_nav_item(item)
+              when ContentItem
+                content << render_content_item(item)
+              end
             end
           end
         end
@@ -99,6 +104,12 @@ module Xebec
         else
           helper.link_to text, href, item.html_options
         end
+      end
+    end
+    
+    def render_content_item(item)
+      helper.content_tag(*list_item_tag(item, item.klass, nil, nil, false)) do
+        helper.content_tag(*item.content_tag_args, &item.block)
       end
     end
 

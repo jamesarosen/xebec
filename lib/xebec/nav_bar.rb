@@ -1,4 +1,5 @@
 require 'xebec/nav_item'
+require 'xebec/content_item'
 
 module Xebec
 
@@ -36,6 +37,19 @@ module Xebec
     # @see Xebec::NavBarProxy#to_s
     def nav_item(name, href = nil, html_options = {})
       items << Xebec::NavItem.new(name, href, html_options)
+    end
+    
+    # Add a non-navigation content item to this bar.  This thinly wraps the content_tag helper method
+    # from ActionView.
+    #
+    # The output of this item will be a <li> tag containing whatever tag you specify in the
+    # arguments here.  You can give the generated <li> tag a class attribute by passing the
+    # :list_item_class option in the options hash.
+    #
+    # @see Xebec::ContentItem.initialize
+    # @see ActionView::Helpers::TagHelper#content_tag
+    def content_item(name, content_or_options_with_block = nil, options = nil, escape = true, &block)
+      items << Xebec::ContentItem.new(name, content_or_options_with_block, options, escape, &block)
     end
 
     def empty?

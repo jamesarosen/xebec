@@ -34,6 +34,17 @@ class NavBarTest < Test::Unit::TestCase
         assert !@bar.empty?
       end
     end
+    
+    context 'with some content items' do
+      setup do
+        @bar.content_item :p, "This is a header for the nav bar."
+        @bar.nav_item :foo
+        @bar.nav_item :bar
+      end
+      should 'not be empty' do
+        assert !@bar.empty?
+      end
+    end
 
     should 'not allow a nameless item to be added' do
       assert_raises ArgumentError do

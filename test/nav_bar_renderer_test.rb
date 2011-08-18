@@ -222,6 +222,60 @@ class NavBarRendererTest < Test::Unit::TestCase
         assert @renderer.to_s.html_safe?
       end
     end
+    
+    context 'with a NavBar that contains ContentItems' do
+      setup do
+        @bar.content_item :p, 'Title of the bar'
+        @bar.nav_item :foo, '/foo'
+      end
+      
+      should 'return an HTML-safe navigation bar' do
+        assert @renderer.to_s.html_safe?
+      end
+      
+      should 'render the content item as its own list item' do
+        assert_select_from @renderer.to_s, 'ul' do
+          assert_select 'li', { :count => 2 }
+          assert_select 'li:first-child p', { :text => 'Title of the bar' }
+          assert_select 'li a', { :count => 1 }
+        end
+      end
+    end
+    
+    context 'with a NavBar that contains ContentItems with blocks' do
+      setup do
+        text = "Hello"
+        @bar.content_item :p do
+          output = ""
+          5.times do |i|
+            output << text
+          end
+          output
+        end
+      end
+      
+      should "render the content item's block" do
+        assert_select_from @renderer.to_s, 'ul' do
+          assert_select 'li p', { :text => "HelloHelloHelloHelloHello" }
+        end
+      end
+    end
+    
+    context 'with a NavBar that contains ContentItems that override the list item class' do
+      setup do
+        @bar.content_item :p, "Item 1", :class => "foo", :list_item_class => "item_one"
+        @bar.content_item :p, :class => "bar", :list_item_class => "item_two" do
+          "Item 2"
+        end
+      end
+      
+      should "render the content item's block" do
+        assert_select_from @renderer.to_s, 'ul' do
+          assert_select 'li.item_one p.foo', { :text => "Item 1" }
+          assert_select 'li.item_two p.bar', { :text => "Item 2" }
+        end
+      end
+    end
 
   end
 
