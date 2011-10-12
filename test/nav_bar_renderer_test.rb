@@ -195,6 +195,26 @@ class NavBarRendererTest < Test::Unit::TestCase
           assert_select 'li.home.current span', 'Home'
         end
       end
+      
+      context 'with render_current_as_link set' do
+        setup do
+          @bar.render_current_as_link = true
+        end
+        
+        should 'render all items as links' do
+          assert_select_from @renderer.to_s, 'ul' do
+            assert_select 'li.home.current', 'Home' do
+              assert_select 'a', 1
+            end
+          end
+          
+          assert_select_from @renderer.to_s, 'ul' do
+            assert_select 'li.sign_up' do
+              assert_select 'a[href="/sign_up"]', 'Sign Up'
+            end
+          end
+        end
+      end
     end
 
     context "with a NavBar that has a navigation item with an i18n'd title" do
