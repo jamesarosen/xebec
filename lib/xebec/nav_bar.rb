@@ -10,6 +10,7 @@ module Xebec
     attr_reader :items
     attr_reader :html_attributes
     attr_accessor :current
+    attr_accessor :render_current_as_link
 
     # Create a new NavBar object.
     #
