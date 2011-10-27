@@ -16,6 +16,10 @@ class NavBarTest < Test::Unit::TestCase
     should 'use a specified name' do
       assert_equal 'fazbot', Xebec::NavBar.new('fazbot').name
     end
+    
+    should 'have current_is_link set to false by default' do
+      assert !@bar.current_is_link
+    end
 
     should 'be empty by default' do
       assert @bar.empty?
@@ -44,6 +48,17 @@ class NavBarTest < Test::Unit::TestCase
       end
     end
 
+  end
+  
+  context 'a NavBar with Xebec.current_is_link set to true' do
+    setup do
+      Xebec.current_is_link = true
+      @bar = Xebec::NavBar.new
+    end
+    
+    should 'have_current_is_link set to true by default' do
+      assert @bar.current_is_link
+    end
   end
 
 end

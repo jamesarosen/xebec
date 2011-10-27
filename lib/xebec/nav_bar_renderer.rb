@@ -94,7 +94,7 @@ module Xebec
       klass = '' << item.name.to_s
       klass << " #{Xebec.currently_selected_nav_item_class}" if is_current
       helper.content_tag(*list_item_tag(item, klass, text, href, is_current)) do
-        if is_current && !bar.render_current_as_link
+        if is_current && !bar.current_is_link
           helper.content_tag :span, text
         else
           helper.link_to text, href, item.html_options

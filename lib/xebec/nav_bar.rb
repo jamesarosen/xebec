@@ -10,7 +10,7 @@ module Xebec
     attr_reader :items
     attr_reader :html_attributes
     attr_accessor :current
-    attr_accessor :render_current_as_link
+    attr_accessor :current_is_link
 
     # Create a new NavBar object.
     #
@@ -22,6 +22,7 @@ module Xebec
       @html_attributes = html_attributes || {}
       @items = []
       @current = nil
+      @current_is_link = Xebec.current_is_link
     end
 
     # Add a navigation item to this bar.

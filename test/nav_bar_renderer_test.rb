@@ -196,9 +196,9 @@ class NavBarRendererTest < Test::Unit::TestCase
         end
       end
       
-      context 'with render_current_as_link set' do
+      context 'with current_is_link set' do
         setup do
-          @bar.render_current_as_link = true
+          @bar.current_is_link = true
         end
         
         should 'render all items as links' do
